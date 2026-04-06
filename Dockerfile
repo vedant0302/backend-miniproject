@@ -14,4 +14,5 @@ COPY server.py .
 RUN playwright install chromium
 
 EXPOSE 8080
-CMD ["gunicorn", "server:app", "--bind", "0.0.0.0:8080"]
+
+CMD ["python", "server.py"]
