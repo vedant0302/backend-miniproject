@@ -320,6 +320,8 @@ def health():
 
 if __name__ == "__main__":
     import os
+    #port = int(os.environ.get("PORT", 5000))
+    #print(f"🚀 QuickCart backend → http://0.0.0.0:{port}")
+    #app.run(debug=False, host="0.0.0.0", port=port)
     port = int(os.environ.get("PORT", 5000))
-    print(f"🚀 QuickCart backend → http://0.0.0.0:{port}")
-    app.run(debug=False, host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)
