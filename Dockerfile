@@ -1,10 +1,18 @@
-FROM python:3.11-slim
+FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
 
 WORKDIR /app
 
-COPY . .
+# Copy requirements and install Python deps
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy app files
+COPY server.py .
+
+# Playwright browsers are pre-installed in the base image
+# Just install the chromium binaries
+RUN playwright install chromium
+
 
 EXPOSE 8080
 
