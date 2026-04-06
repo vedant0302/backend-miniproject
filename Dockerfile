@@ -1,18 +1,11 @@
-FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy requirements and install Python deps
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY . .
 
-# Copy app files
-COPY server.py .
-
-# Playwright browsers are pre-installed in the base image
-# Just install the chromium binaries
-RUN playwright install chromium
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
 
-CMD ["python", "server.py"]
+CMD ["gunicorn", "server:app", "--bind", "0.0.0.0:8080"]
